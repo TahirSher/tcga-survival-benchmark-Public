@@ -1,0 +1,73 @@
+﻿project:
+  name: tcga_survival_masterpiece
+  root_dir: D:\Dr_Abdul_Rehman\TCGA_Paper\TCGA_project
+  raw_data_root: D:\Dr_Abdul_Rehman\TCGA_Paper\Raw_Data
+  seed: 42
+  n_jobs: 20
+
+cohorts:
+  BRCA:
+    cancer_type: BRCA
+    directory: D:\Dr_Abdul_Rehman\TCGA_Paper\Raw_Data\BRCA
+    clinical_csv: clinical_tcga_BRCA.csv
+    clinical_json: clinical.project-tcga-brca.2025-09-30.json
+    biospecimen_csv: biospecimen.project-tcga-brca.csv
+    biospecimen_json: biospecimen.project-tcga-brca.2025-09-30.json
+    manifest_txt: gdc_manifest.2025-09-30.134950.txt
+    omics_zip: BRCA Multi-Omics (TCGA).csv.zip
+
+  COAD:
+    cancer_type: COAD
+    directory: D:\Dr_Abdul_Rehman\TCGA_Paper\Raw_Data\COAD
+    clinical_csv: clinical_tcga_COAD.csv
+    clinical_json: clinical.project-tcga-coad.2025-09-30.json
+    biospecimen_csv: Biospecimen-COAD-TCGA.csv
+    biospecimen_json: biospecimen.project-tcga-coad.2025-09-30.json
+    manifest_txt: gdc_manifest.2025-09-30.135409.txt
+    omics_zip: null
+
+  LUAD:
+    cancer_type: LUAD
+    directory: D:\Dr_Abdul_Rehman\TCGA_Paper\Raw_Data\LUAD
+    clinical_csv: clinical_tcga_LUAD-FRESH.csv
+    clinical_json: clinical.project-tcga-luad.2025-09-30.json
+    biospecimen_csv: bIOSPECIMAN-LUAD.csv
+    biospecimen_json: biospecimen.project-tcga-luad.2025-09-30.json
+    manifest_txt: gdc_manifest.2025-09-30.134736.txt
+    omics_zip: null
+
+outputs:
+  audit_dir: D:\Dr_Abdul_Rehman\TCGA_Paper\TCGA_project\outputs\audit
+  interim_dir: D:\Dr_Abdul_Rehman\TCGA_Paper\TCGA_project\outputs\interim
+  processed_dir: D:\Dr_Abdul_Rehman\TCGA_Paper\TCGA_project\outputs\processed
+  splits_dir: D:\Dr_Abdul_Rehman\TCGA_Paper\TCGA_project\outputs\splits
+  models_dir: D:\Dr_Abdul_Rehman\TCGA_Paper\TCGA_project\outputs\models
+  predictions_dir: D:\Dr_Abdul_Rehman\TCGA_Paper\TCGA_project\outputs\predictions
+  figures_dir: D:\Dr_Abdul_Rehman\TCGA_Paper\TCGA_project\outputs\figures
+  tables_dir: D:\Dr_Abdul_Rehman\TCGA_Paper\TCGA_project\outputs\tables
+  logs_dir: D:\Dr_Abdul_Rehman\TCGA_Paper\TCGA_project\outputs\logs
+
+build_master_table:
+  patient_id_priority:
+    - submitter_id
+    - case_id
+  event_candidates:
+    - demographic.vital_status
+  survival_time_candidates:
+    - demographic.days_to_death
+    - days_to_death
+  age_candidates:
+    - demographic.age_at_index
+    - age_at_diagnosis
+    - demographic.days_to_birth
+  sex_candidates:
+    - demographic.gender
+  treatment_candidates:
+    - treatments
+    - diagnoses
+    - exposures
+    - follow_ups
+  stage_candidates:
+    - diagnoses
+    - follow_ups
+  save_intermediate_tables: true
